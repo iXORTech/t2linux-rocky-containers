@@ -43,7 +43,7 @@ jobs:
         uses: redhat-actions/podman-login@v1
         with:
           registry: ${{ env.REGISTRY }}
-          username: iXORTech
+          username: ixortech
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push image to ghcr.io
@@ -52,4 +52,4 @@ jobs:
         with:
           image: ${{ steps.build-image.outputs.image }}
           tags: ${{ steps.build-image.outputs.tags }}
-          registry: ${{ env.REGISTRY }}/iXORTech
+          registry: ${{ env.REGISTRY }}/ixortech
