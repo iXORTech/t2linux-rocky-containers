@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         image: ["rocky-ci"]
-        release: [ "10" ]
+        release: [ "unstable" ]
     uses: ./.github/workflows/build-image.yml
     with:
       image_name: ${{ matrix.image }}
