@@ -2,15 +2,15 @@ name: Update all images
 on:
   workflow_dispatch:
   schedule:
-    # Every day at 2:49 AM
-    - cron: "49 2 * * *"
+    # Every day at 00:00 UTC
+    - cron: "0 0 * * *"
 
 jobs:
   build-images:
     strategy:
       matrix:
-        image: ["fedora-ci", "fedora-silverblue"]
-        release: [ "41", "42", "unstable" ]
+        image: ["rocky-ci"]
+        release: [ "10" ]
     uses: ./.github/workflows/build-image.yml
     with:
       image_name: ${{ matrix.image }}
@@ -23,13 +23,7 @@ jobs:
     steps:
     - uses: "actions/delete-package-versions@v5"
       with:
-        package-name: fedora-ci
-        package-type: container
-        delete-only-untagged-versions: true
-        min-versions-to-keep: 3
-    - uses: "actions/delete-package-versions@v5"
-      with:
-        package-name: fedora-silverblue
+        package-name: rocky-ci
         package-type: container
         delete-only-untagged-versions: true
         min-versions-to-keep: 3

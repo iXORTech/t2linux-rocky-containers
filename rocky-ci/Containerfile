@@ -1,5 +1,10 @@
-FROM fedora:41
+FROM rockylinux/rockylinux:10
 SHELL ["/usr/bin/bash", "-c"]
+
+RUN dnf install --quiet -y epel-release
+
+RUN dnf copr enable -y @rpm-software-management/tito
+RUN dnf clean all && dnf update -y
 
 RUN dnf install --quiet -y \
     koji \
@@ -20,11 +25,15 @@ RUN dnf install --quiet -y \
     lorax-lmc-novirt \
     dracut-live \
     kiwi \
-    tito \
+    # tito \
     xorriso \
     erofs-utils \
     qemu-img \
     kiwi-boxed-plugin \
+    pip \
 && dnf clean all
+
+RUN pip3 install --user tito
+ENV PATH="/root/.local/bin:${PATH}"
 
 COPY mock-defaults.cfg /etc/mock/site-defaults.cfg

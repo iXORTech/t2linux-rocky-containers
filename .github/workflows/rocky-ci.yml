@@ -1,15 +1,15 @@
-name: Build image 'fedora-silverblue'
+name: Build image 'rocky-ci'
 on:
   push:
     branches:
       - main
     paths:
-      - 'fedora-silverblue/*'
+      - 'rocky-ci/*'
 jobs:
   build-image:
     uses: ./.github/workflows/build-image.yml
     with:
-      image_name: "fedora-silverblue"
+      image_name: "rocky-ci"
       tags: unstable
       publish: ${{ github.ref == 'refs/heads/main' }}
       branch: main
